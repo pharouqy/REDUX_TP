@@ -4,6 +4,7 @@ export const GET_POSTS = "GET_POSTS";
 export const ADD_POST = "ADD_POST";
 export const EDIT_POST = "EDIT_POST";
 export const DELETE_POST = "DELETE_POST";
+export const LIKE_POST = "LIKE_POST";
 
 export const getPosts = () => {
   return async (dispatch) => {
@@ -30,5 +31,12 @@ export const deletePost = (postId) => {
   return async (dispatch) => {
     await axios.delete(`http://localhost:3000/posts/${postId}`);
     dispatch({ type: DELETE_POST, payload: postId });
+  };
+};
+
+export const addPostLike = (data) => {
+  return async (dispatch) => {
+    await axios.put(`http://localhost:3000/posts/${data.id}`, data);
+    dispatch({ type: LIKE_POST, payload: data });
   };
 };
